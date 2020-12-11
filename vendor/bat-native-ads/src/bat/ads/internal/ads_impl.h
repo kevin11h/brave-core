@@ -62,6 +62,7 @@ class Client;
 class ConfirmationsState;
 class Conversions;
 class NewTabPageAd;
+class SysInfoHelper;
 class TabManager;
 class UserActivity;
 struct AdInfo;
@@ -190,6 +191,7 @@ class AdsImpl
   bool is_initialized_ = false;
 
   std::unique_ptr<AdsClientHelper> ads_client_helper_;
+  std::unique_ptr<SysInfoHelper> sys_info_helper_;
   std::unique_ptr<privacy::TokenGenerator> token_generator_;
   std::unique_ptr<Account> account_;
   std::unique_ptr<ad_targeting::contextual::PageClassifier> page_classifier_;
