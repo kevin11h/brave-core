@@ -40,6 +40,7 @@ class RequestSignedTokensUrlRequestBuilder : UrlRequestBuilder {
       const std::string& body) const;
   std::string BuildSignatureHeaderValue(
       const std::string& body) const;
+  std::string BuildServerHeader() const;
 
   std::string BuildBody() const;
 };

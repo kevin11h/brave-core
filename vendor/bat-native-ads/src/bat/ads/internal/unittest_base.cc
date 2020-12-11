@@ -23,12 +23,18 @@ UnitTestBase::UnitTestBase()
       ads_client_mock_(std::make_unique<NiceMock<AdsClientMock>>()),
       locale_helper_mock_(std::make_unique<NiceMock<
           brave_l10n::LocaleHelperMock>>()),
-      platform_helper_mock_(std::make_unique<NiceMock<PlatformHelperMock>>()) {
+      sys_info_helper_mock_(std::make_unique<NiceMock<SysInfoHelperMock>>()),
+      platform_helper_mock_(std::make_unique<NiceMock<PlatformHelperMock>>()),
+      rpill_helper_mock_(std::make_unique<NiceMock<RPillHelperMock>>()) {
   // You can do set-up work for each test here
   brave_l10n::LocaleHelper::GetInstance()->set_for_testing(
       locale_helper_mock_.get());
 
+  SysInfoHelper::GetInstance()->set_for_testing(sys_info_helper_mock_.get());
+
   PlatformHelper::GetInstance()->set_for_testing(platform_helper_mock_.get());
+
+  RPillHelper::GetInstance()->set_for_testing(rpill_helper_mock_.get());
 }
 
 UnitTestBase::~UnitTestBase() {
@@ -118,6 +124,8 @@ void UnitTestBase::Initialize() {
 
   MockPlatformHelper(platform_helper_mock_, PlatformType::kWindows);
 
+  MockRPillHelper(rpill_helper_mock_, /* is_uncertain_future */ false);
+
   MockIsNetworkConnectionAvailable(ads_client_mock_, true);
 
   MockIsForeground(ads_client_mock_, true);
@@ -189,6 +197,8 @@ void UnitTestBase::InitializeAds() {
       const Result result) {
     ASSERT_EQ(Result::SUCCESS, result);
   });
+
+  task_environment_.RunUntilIdle();
 }
 
 }  // namespace ads

@@ -545,6 +545,13 @@ void MockPlatformHelper(
       .WillByDefault(Return(platform_type));
 }
 
+void MockRPillHelper(
+    const std::unique_ptr<RPillHelperMock>& mock,
+    const bool is_uncertain_future) {
+  ON_CALL(*mock, IsUncertainFuture())
+      .WillByDefault(Return(is_uncertain_future));
+}
+
 void MockIsNetworkConnectionAvailable(
     const std::unique_ptr<AdsClientMock>& mock,
     const bool is_available) {
