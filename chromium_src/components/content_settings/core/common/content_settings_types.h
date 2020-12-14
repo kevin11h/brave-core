@@ -15,7 +15,7 @@
   BRAVE_COOKIES,                          \
   BRAVE_FACEBOOK_EMBEDS,                  \
   BRAVE_TWITTER_EMBEDS,                   \
-  BRAVE_LINKEDIN_EMBEDS,
+  BRAVE_LINKEDIN_EMBEDS
 
 #include "../../../../../../components/content_settings/core/common/content_settings_types.h"
 
